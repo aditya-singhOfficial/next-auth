@@ -7,7 +7,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 export default function UserProfile({ params }: any) {
   const { id } = params;
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState("user");
   const router = useRouter();
   const onLogout = async () => {
     try {
@@ -23,7 +23,7 @@ export default function UserProfile({ params }: any) {
 
   const getUserData = async () => {
     const userData = await axios.get("/api/users/whoami");
-    setUser(userData.data.data);
+    setUser(userData.data.data.username);
   };
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function UserProfile({ params }: any) {
           <h1>
             Hello!{" "}
             <span className="uppercase font-black font-serif">
-              {user.username}
+              {user}
             </span>
           </h1>
           <button
