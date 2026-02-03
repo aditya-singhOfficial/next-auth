@@ -1,7 +1,5 @@
 import nodemailer from "nodemailer";
-import bycrypt from "bcrypt";
 import User from "@/models/userModel";
-import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 export const sendMail = async ({ email, mailType, userID }: any) => {
   try {
@@ -42,9 +40,10 @@ export const sendMail = async ({ email, mailType, userID }: any) => {
     };
 
     const mailResponse = await transport.sendMail(mailOptions);
-
+    console.log("Mail sent successfully: ", mailResponse);
     return mailResponse;
   } catch (error: any) {
+    console.error("Error sending mail: ", error);
     throw new Error(error.message);
   }
 };
