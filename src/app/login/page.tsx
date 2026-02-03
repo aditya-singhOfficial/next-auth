@@ -26,8 +26,8 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="w-full min-h-screen ">
-      <div className="max-w-[30vw] border shadow-2xs rounded-lg mx-auto mt-32 p-4 flex flex-col gap-5">
+    <div className="bg-gray-700 flex flex-col justify-center items-center text-white h-screen w-full ">
+      <div className="w-[30vw] border shadow-2xs rounded-lg mx-auto  p-4 flex flex-col gap-5">
         <h1 className="text-center text-2xl">Login</h1>
         <div>
           <form method="post" className="flex flex-col gap-4">
@@ -55,14 +55,23 @@ export default function LoginPage() {
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
               />
             </div>
-            <button
-              onClick={onLogin}
-              className="bg-blue-600 w-fit mx-auto text-white font-semibold px-3 py-1 rounded-full cursor-pointer"
-            >
-              Login
-            </button>
-            <Link className="text-center text-blue-900 " href={"/signup"}>
-              goto signup page
+            <div className="flex justify-between my-6">
+              <button
+                onClick={onLogin}
+                className="bg-blue-600 w-fit mx-auto text-white font-semibold px-3 py-1 rounded-full cursor-pointer"
+              >
+                Login
+              </button>
+              <Link
+                href={"/forget"}
+                className="bg-blue-600 w-fit mx-auto text-white font-semibold px-3 py-1 rounded-full cursor-pointer"
+              >
+                Forget Password
+              </Link>
+            </div>
+
+            <Link className="text-center text-blue-300 " href={"/signup"}>
+              go to signup page
             </Link>
           </form>
         </div>

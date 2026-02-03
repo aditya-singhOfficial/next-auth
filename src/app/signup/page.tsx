@@ -33,8 +33,8 @@ export default function SignUP() {
   };
 
   return (
-    <div className="w-full min-h-screen ">
-      <div className="max-w-[30vw] border shadow-2xs rounded-lg mx-auto mt-32 p-4 flex flex-col gap-5">
+    <div className="bg-gray-700 flex flex-col justify-center items-center text-white h-screen w-full">
+      <div className="w-[30vw] border shadow-2xs rounded-lg mx-auto mt-32 p-4 flex flex-col gap-5">
         <h1 className="text-center text-2xl">Sign Up</h1>
         <div>
           <form
@@ -85,8 +85,8 @@ export default function SignUP() {
               Signup
             </button>
             <Toaster position="top-center" reverseOrder={false} />
-            <Link className="text-center text-blue-900 " href={"/login"}>
-              goto login page
+            <Link className="text-center text-blue-300 " href={"/login"}>
+              go to login page
             </Link>
           </form>
         </div>

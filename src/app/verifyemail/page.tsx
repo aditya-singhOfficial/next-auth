@@ -34,7 +34,7 @@ export default function verifyEmail() {
   }, [token]);
 
   return (
-    <div className="flex flex-col gap-5 items-center justify-center h-screen w-full">
+    <div className="flex flex-col gap-5 items-center justify-center h-screen w-full bg-gray-700 text-white">
       <h1>User Verification</h1>
       {error && <h1 className="text-rose-600">Error Occured </h1>}
       {isVerified && <h1 className="text-green-600">User Verified</h1>}
