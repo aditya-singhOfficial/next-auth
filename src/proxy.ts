@@ -4,31 +4,24 @@ import type { NextRequest } from "next/server";
 export function proxy(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
-  const isPublicPath = path === "/" || path === "/login" || path === "/signup";
-  const isForgetPath = path === "/forget";
-  const isChangePasswordPath = path === "/changePassword";
+  const authRoutes = ["/login", "/signup", "/forget", "/changePassword"];
+  const protectedRoutes = ["/profile", "/logout"];
   const token = request.cookies.get("token")?.value || "";
 
-  if (isPublicPath && token) {
-    return NextResponse.redirect(new URL("/profile", request.url));
+  if (token && authRoutes.includes(path)) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/profile";
+    return NextResponse.redirect(url);
+  }
+  if (!token && protectedRoutes.includes(path)) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/login";
+    return NextResponse.redirect(url);
   }
 
-  if (token && (isForgetPath || isChangePasswordPath)) {
-    return NextResponse.redirect(new URL("/profile", request.url));
-  }
-  if (!isPublicPath && !token) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: [
-    "/",
-    "/login",
-    "/signup",
-    "/logout",
-    "/profile/:path*",
-    "/forget",
-    "/changePassword",
-  ],
+  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
 };
