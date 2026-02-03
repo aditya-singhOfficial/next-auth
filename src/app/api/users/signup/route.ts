@@ -2,6 +2,7 @@ import {connectToMongoDB} from "@/config/mongoDbConfig/mongoConfig";
 import User from "@/models/userModel";
 import bcrypt from "bcryptjs";
 import { NextRequest, NextResponse } from "next/server";
+import { sendMail } from "@/helpers/mailer";
 
 connectToMongoDB();
 
@@ -35,12 +36,16 @@ export async function POST(request: NextRequest) {
 
         const savedUser = await newUser.save();
 
+        await sendMail({email, mailType: "VERIFY", userID: savedUser._id})
+
         return NextResponse.json({
             message: "User Created Successfully",
             success: true, 
             savedUser
         },{status:201})
     } catch (error: any) {
+        console.log(`signup error:`,error);
+        
         return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });  
     }
 }
