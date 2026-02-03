@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
 
-    sendMail({ email, mailType: "RESET", userID: user._id });
+    await sendMail({ email, mailType: "RESET", userID: user._id });
     return NextResponse.json(
       { 
         message: "Forget password Mail generated", success: true },
